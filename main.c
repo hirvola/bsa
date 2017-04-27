@@ -197,8 +197,7 @@ int main(int argc, char *argv[])
         }
         texec += stopclock();
 
-next:
-        i = j+1;
+next:   i = j+1;
         np++;
     }
 
