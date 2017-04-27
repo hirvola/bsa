@@ -1,6 +1,5 @@
 /*
  * Approximate Boyer-Moore for string matching with k mismatches.
- * Based on Shift-Add.
  */
 
 #include <stdio.h>
