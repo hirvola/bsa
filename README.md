@@ -1,8 +1,6 @@
 Bit-Parallel Approximate Matching of Circular Strings with *k* Mismatches
 =========================================================================
 
-MIT License; Copyright (c) 2017 Tommi Hirvola.
-
 Contents
 --------
 
@@ -23,7 +21,7 @@ Contents
     * [cbsa.c](cbsa.c) Circular Backward Shift-Add.
     * [cnaive.c](cnaive.c) A naive k-mismatches algorithm for circular strings.
 
-* Test data (`n=1MB` prefixes of texts from the SMART corpus):
+* Test data (`n=1MB` prefixes of texts from the [SMART](https://www.dmi.unict.it/~faro/smart/) corpus):
     * [1MB/english/bible.txt](1MB/english/bible.txt) KJV bible.
     * [1MB/genome/ecoli.txt](1MB/genome/ecoli.txt) Genome of E. coli.
     * [1MB/rand256/rand256.txt](1MB/rand256/rand256.txt) Uniform random data with byte alphabet.
