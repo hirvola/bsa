@@ -87,10 +87,6 @@ patterns of length `m=20` in the KJV bible while allowing 3 mismatches:
 ```bash
 $ wc -l 1MB/english/bible.txt.20.pat                      
 1000 1MB/english/bible.txt.20.pat
-$ ./bsa -k3 -e1 1MB/english/bible.txt <1MB/english/bible.txt.20.pat
-alg=./bsa T=1MB/english/bible.txt(1048576) P=1000 m=20 k=3 occ=6122 p=0.0000s(0/1) e=0.8900s(89/1)
-$ ./bsa -k3 -e2 1MB/english/bible.txt <1MB/english/bible.txt.20.pat 
-alg=./bsa T=1MB/english/bible.txt(1048576) P=1000 m=20 k=3 occ=6122 p=0.0000s(0/1) e=0.8400s(168/2)
-$ ./bsa -k3 -e10 1MB/english/bible.txt <1MB/english/bible.txt.20.pat 
-alg=./bsa T=1MB/english/bible.txt(1048576) P=1000 m=20 k=3 occ=6122 p=0.0000s(0/1) e=0.8200s(820/10)
+$ ./bsa -k3 -p100 -e100 1MB/english/bible.txt <1MB/english/bible.txt.20.pat
+alg=./bsa T=1MB/english/bible.txt(1048576) np=1000 m=20 k=3 occ=6122 p=0.0001s(1/100) e=0.8041s(8041/100)
 ```
