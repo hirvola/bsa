@@ -71,7 +71,7 @@ size_t exec(unsigned char *T, size_t n, size_t k)
     size_t i, j, occ = 0;
 
     /* TwSA */
-    for (i = m; i <= n-m; i = i + m) {
+    for (i = m-1; i <= n-m; i = i + m) {
         D = IV + B[T[i]];
         for (j = 1; j < m && ~D & Hmask; j++) {
             D = D + ((~D >> (L-1)) & (B[T[i-j]] << j*L))
@@ -85,7 +85,7 @@ size_t exec(unsigned char *T, size_t n, size_t k)
 
     /* Apply TuSA for the last alignments */
     D = ~(word)0;
-    for (i = i - m; i < n; i++) {
+    for (i = i - (m-1); i < n; i++) {
         D = ((D << L) | (Hbit - (k+1))) + (B[T[i]] & ~(D << 1));
         if (!(D & ((word)1 << (m*L-1)))) {
             /* match at T[i-m+1..i] */
