@@ -1,6 +1,6 @@
 /*
  * Tuned Approximate BNDM for string matching with k mismatches.
- * Based on Backward Shift-Add.
+ * Mismatch counting method based on Backward Shift-Add.
  */
 
 #include <stdio.h>
