@@ -1,6 +1,6 @@
 CFLAGS ?= -O3 -Wall
 LDFLAGS ?=
-ALGS = abm abndm asb bsa cacb cacbr casb cbsa cnaive naive tuabndm tusa twsa
+ALGS = abm abndm asb bsa cacb cacbr casb cbsa cnaive naive sa tuabndm tusa twsa
 
 all: $(ALGS)
 

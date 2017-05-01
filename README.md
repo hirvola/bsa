@@ -10,6 +10,7 @@ Contents
     * [asb.c](asb.c) Approximate SBNDM.
     * [bsa.c](bsa.c) Backward Shift-Add.
     * [naive.c](naive.c) A naive k-mismatches algorithm.
+    * [sa.c](sa.c) Shift-Add.
     * [tuabndm.c](tuabndm.c) Tuned Approximate BNDM (based on Backward Shift-Add).
     * [tusa.c](tusa.c) Tuned Shift-Add.
     * [twsa.c](twsa.c) Two-way Shift-Add.
