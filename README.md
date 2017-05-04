@@ -37,7 +37,7 @@ Usage
 -----
 
 The algorithms should compile straight out of the box on most UNIX-like systems
-by issuing `make`. A successful compilation produces a total of 13 test programs
+by issuing `make`. A successful compilation produces a total of 14 test programs
 that share the same command-line interface (implemented in [main.c](main.c)):
 
 ```bash
