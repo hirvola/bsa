@@ -12,4 +12,4 @@ twsa: main.c twsa.c
 clean:
 	$(RM) $(ALGS)
 
-.PHONY: clean
+.PHONY: all clean
