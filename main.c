@@ -2,9 +2,13 @@
  * Test harness for the k-mismatches algorithms.
  */
 
+#ifdef __linux
 #define _GNU_SOURCE
-#include <getopt.h>
 #include <sched.h>
+#endif
+
+#include <ctype.h>
+#include <getopt.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/times.h>
@@ -21,6 +25,7 @@ extern size_t exec(unsigned char *T, size_t n, size_t k);
 static struct tms start;
 void startclock()
 {
+#ifdef __linux
     int onln;  /* number of processors online */
     if ((onln = sysconf(_SC_NPROCESSORS_ONLN)) > 1) {
         int i;
@@ -46,6 +51,7 @@ void startclock()
             printf("Failed to set cpu affinity for cpu %d\n", onln-1);
         }
     }
+#endif
     times(&start);
 }
 
