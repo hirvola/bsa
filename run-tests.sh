@@ -6,7 +6,7 @@ T=3000
 
 # String matching with k mismatches
 for text in ./1MB/genome/ecoli.txt ./1MB/english/bible.txt ./1MB/rand256/rand256.txt; do
-    for alg in ./naive ./abm ./abndm ./tusa ./twsa ./bsa; do
+    for alg in ./naive ./abm ./abndm ./sa ./tusa ./twsa ./bsa; do
         for k in 1 2 3; do
             for m in 8 12 16 20; do
                 echo "$ $alg -p$p -e$e -k$k $text < $text.$m.pat" >&2
