@@ -2,7 +2,7 @@
  * Test harness for the k-mismatches algorithms.
  */
 
-#ifdef __linux
+#ifdef __linux__
 #define _GNU_SOURCE
 #include <sched.h>
 #endif
@@ -25,7 +25,7 @@ extern size_t exec(unsigned char *T, size_t n, size_t k);
 static struct tms start;
 void startclock()
 {
-#ifdef __linux
+#ifdef __linux__
     int onln;  /* number of processors online */
     if ((onln = sysconf(_SC_NPROCESSORS_ONLN)) > 1) {
         int i;
