@@ -43,7 +43,7 @@ void prep(unsigned char *P_, size_t m_, size_t k)
         B[P[i]] |= (word)1 << i;
 }
 
-size_t exec(unsigned char *T, size_t n, size_t k, size_t q)
+size_t exec(unsigned char *T, size_t n, size_t k)
 {
     word D;
     size_t i, j, e, occ = 0;
