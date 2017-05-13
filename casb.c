@@ -8,10 +8,11 @@
 #include <string.h>
 
 typedef unsigned long word;
-#define W (8 * (int)sizeof(word))
+#define W (8 * sizeof(word))
 
 static unsigned char *P;
 static size_t m;
+
 static word E, B[256];
 
 /* Verify a circular occurrence allowing k mismatches */
@@ -32,11 +33,11 @@ static int verify(unsigned char *S, size_t k)
 void prep(unsigned char *P_, size_t m_, size_t k)
 {
     size_t i;
-    P = P_; m = m_;
+    P = P_; m = m_; (void)k;
 
     if (m+1 > W) {
-        fprintf(stderr, "need m+1=%lu > %d=W bits\n", (unsigned long)m+1, W);
-        exit(42);
+        fprintf(stderr, "need m+1=%ld > %d=W bits\n", (long)m+1, (int)W);
+        exit(EXIT_FAILURE);
     }
 
     /* Initialization vector */

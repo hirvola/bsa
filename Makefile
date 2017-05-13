@@ -6,6 +6,7 @@ all: $(ALGS)
 
 %: main.c %.c
 	$(CC) $(CFLAGS) $^ -o $@ $(LDFLAGS)
+
 twsa: main.c twsa.c
 	$(CC) $(CFLAGS) -mpopcnt $^ -o $@ $(LDFLAGS)
 

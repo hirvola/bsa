@@ -6,15 +6,15 @@
 #include <stdlib.h>
 
 typedef unsigned long word;
-#define W (8 * (int)sizeof(word))
+#define W (8 * sizeof(word))
 
-static int B; /* number of bits per state */
+static unsigned int B;
 static word lim, ovmask, mask, T[256];
 
 /* ceil(log2(x)) */
-int clog2(size_t x)
+static unsigned int clog2(size_t x)
 {
-    int i;
+    unsigned int i;
     for (i = 0; ((size_t)1 << i) < x; i++);
     return i;
 }
@@ -25,8 +25,8 @@ void prep(unsigned char *pat, size_t m, size_t k)
 
     B = clog2(k+1) + 1;
     if (m*B > W) {
-        fprintf(stderr, "need m*B=%lu > %d=W bits\n", (unsigned long)(m*B), W);
-        exit(42);
+        fprintf(stderr, "need m*B=%ld > %d=W bits\n", (long)(m*B), (int)W);
+        exit(EXIT_FAILURE);
     }
 
     lim = (word)k << (m-1)*B;
@@ -40,13 +40,13 @@ void prep(unsigned char *pat, size_t m, size_t k)
         pat++;
     }
 
-    mask = (m*B == W) ? ~(word)0 : i-1;
+    mask = (m*B == W) ? ~(word)0 : (word)(i-1);
 }
 
 size_t exec(unsigned char *text, size_t n, size_t k)
 {
     word state, overflow;
-    size_t i, occ = 0;
+    size_t i, occ = 0; (void)k;
 
     state = mask & ~ovmask;
     overflow = ovmask;

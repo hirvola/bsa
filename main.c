@@ -23,7 +23,7 @@ extern size_t exec(unsigned char *T, size_t n, size_t k);
  * Peltola, H. Towards faster string matching. PhD thesis, 2014.
  */
 static struct tms start;
-void startclock()
+static void startclock()
 {
 #ifdef __linux__
     int onln;  /* number of processors online */
@@ -55,7 +55,7 @@ void startclock()
     times(&start);
 }
 
-clock_t stopclock()
+static clock_t stopclock()
 {
     struct tms t;
     times(&t);
@@ -115,9 +115,8 @@ int main(int argc, char *argv[])
 {
     FILE *in;
     int c, k, p, e, hz;
-    size_t m, n, i, occ;
+    size_t m, n, mmin, mmax, np, i, occ;
     unsigned char *P, *T;
-    unsigned long np, mmin, mmax;
     clock_t tprep, texec;
 
     /* Parse arguments */
@@ -164,9 +163,8 @@ int main(int argc, char *argv[])
     }
 
     /* Run the algorithm for each pattern */
-    i = occ = 0;
     tprep = texec = 0;
-    np = mmin = mmax = 0;
+    i = mmin = mmax = np = occ = 0;
     while (i < m) {
         int r;
         size_t j, len;
@@ -199,7 +197,7 @@ int main(int argc, char *argv[])
         startclock();
         occ += exec(T, n, k);
         for (r = 1; r < e; r++) {
-            exec(T, n, k);
+            (void)exec(T, n, k);
         }
         texec += stopclock();
 
@@ -209,13 +207,10 @@ next:   i = j+1;
 
     /* Report results */
     hz = sysconf(_SC_CLK_TCK);
-    fprintf(stdout, "alg=%s T=%s(%lu) np=%lu",
-            argv[0], argv[argc-1], (unsigned long)n, np);
-    if (mmin != mmax) {
-        fprintf(stdout, " m=%lu..%lu", mmin, mmax);
-    } else {
-        fprintf(stdout, " m=%lu", mmin);
-    }
+    fprintf(stdout, "alg=%s T=%s(%lu) np=%lu", argv[0], argv[argc-1],
+            (unsigned long)n, (unsigned long)np);
+    fprintf(stdout, " m=%lu", (unsigned long)mmin);
+    if (mmin != mmax) fprintf(stdout, "..%lu", (unsigned long)mmax);
     fprintf(stdout, " k=%d occ=%lu", k, (unsigned long)occ);
     fprintf(stdout, " p=%.4fs(%lu/%d) e=%.4fs(%lu/%d)\n",
             (double)tprep / (hz*p), (unsigned long)tprep, p,

@@ -6,10 +6,11 @@
 #include <stdlib.h>
 
 typedef unsigned long word;
-#define W (8 * (int)sizeof(word))
+#define W (8 * sizeof(word))
 
 static unsigned char *P;
 static size_t m;
+
 static size_t D[1024][256] = {{0}};
 
 void prep(unsigned char *P_, size_t m_, size_t k)
@@ -19,8 +20,8 @@ void prep(unsigned char *P_, size_t m_, size_t k)
     P = P_; m = m_;
 
     if (m > 1024) {
-        fprintf(stderr, "m=%lu exceeds the limit M=1024\n", (unsigned long)m);
-        exit(42);
+        fprintf(stderr, "m=%ld exceeds the limit M=1024\n", (long)m);
+        exit(EXIT_FAILURE);
     }
 
     P--; /* P = P[1..m] */

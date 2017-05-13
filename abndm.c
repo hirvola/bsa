@@ -7,19 +7,19 @@
 #include <stdlib.h>
 
 typedef unsigned long word;
-#define W (8 * (int)sizeof(word))
+#define W (8 * sizeof(word))
 
 static unsigned char *P;
 static size_t m;
 
-static int L; /* number of bits per state */
+static unsigned int L;
 static word Hbit, Lmask, Hmask, IV, Vmask, lim;
 static word B[256];
 
 /* ceil(log2(x)) */
-int clog2(size_t x)
+static unsigned int clog2(size_t x)
 {
-    int i;
+    unsigned int i;
     for (i = 0; ((size_t)1 << i) < x; i++);
     return i;
 }
@@ -32,8 +32,8 @@ void prep(unsigned char *P_, size_t m_, size_t k)
 
     L = clog2(k+1) + 1;
     if (m*L > W) {
-        fprintf(stderr, "need m*L=%lu > %d=W bits\n", (unsigned long)(m*L), W);
-        exit(42);
+        fprintf(stderr, "need m*L=%ld > %d=W bits\n", (long)(m*L), (int)W);
+        exit(EXIT_FAILURE);
     }
 
     /* Initialize constants */
@@ -57,7 +57,7 @@ void prep(unsigned char *P_, size_t m_, size_t k)
 size_t exec(unsigned char *T, size_t n, size_t k)
 {
     word D, O;
-    size_t j, pos, last, occ = 0;
+    size_t j, pos, last, occ = 0; (void)k;
 
     T--; /* T = T[1..n] */
     pos = 0;

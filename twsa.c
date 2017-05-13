@@ -6,11 +6,12 @@
 #include <stdlib.h>
 
 typedef unsigned long word;
-#define W (8 * (int)sizeof(word))
+#define W (8 * sizeof(word))
 
 static unsigned char *P;
 static size_t m;
-static int L; /* number of bits per state */
+
+static unsigned int L;
 static word Hbit, Lmask, Hmask, IV, Vmask;
 static word B[256];
 
@@ -29,9 +30,9 @@ int popcount(word x)
 #endif
 
 /* ceil(log2(x)) */
-int clog2(size_t x)
+static unsigned int clog2(size_t x)
 {
-    int i;
+    unsigned int i;
     for (i = 0; ((size_t)1 << i) < x; i++);
     return i;
 }
@@ -44,8 +45,8 @@ void prep(unsigned char *P_, size_t m_, size_t k)
 
     L = k ? clog2(k+1) + 1 : 2;
     if (m*L > W) {
-        fprintf(stderr, "need m*L=%lu > %d=W bits\n", (unsigned long)(m*L), W);
-        exit(42);
+        fprintf(stderr, "need m*L=%ld > %d=W bits\n", (long)(m*L), (int)W);
+        exit(EXIT_FAILURE);
     }
 
     /* Initialize constants */

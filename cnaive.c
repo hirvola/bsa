@@ -9,7 +9,7 @@ static size_t m;
 
 void prep(unsigned char *P_, size_t m_, size_t k)
 {
-    P = P_; m = m_;
+    P = P_; m = m_; (void)k;
 }
 
 size_t exec(unsigned char *T, size_t n, size_t k)

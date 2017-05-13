@@ -8,14 +8,15 @@
 #include <string.h>
 
 typedef unsigned long word;
-#define W (8 * (int)sizeof(word))
+#define W (8 * sizeof(word))
+
+static unsigned char *P;
+static size_t m;
+
+static word B[256];
 
 /* Rotate bit vector 'v' of width 'w' to the left by 'c' bits. */
 #define ROL(v, c, w) (((v) << (c)) | ((v) >> ((w)-(c))))
-
-static int m;
-static unsigned char *P;
-static word B[256];
 
 /* Verify a circular occurrence allowing k mismatches */
 static int verify(unsigned char *S, size_t k)
@@ -34,10 +35,13 @@ static int verify(unsigned char *S, size_t k)
 
 void prep(unsigned char *P_, size_t m_, size_t k)
 {
-    int i;
-    P = P_; m = m_;
+    size_t i;
+    P = P_; m = m_; (void)k;
 
-    /* Indexing from 1. */
+    if (m > W) {
+        fprintf(stderr, "need m=%ld > %d=W bits\n", (long)m, (int)W);
+        exit(EXIT_FAILURE);
+    }
 
     /* Initialize incidence matrix B. */
     memset(B, 0, sizeof(B));
